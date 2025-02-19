@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scattered AUGUSTRAYJONES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        .letter {
+            position: absolute;
+            font-size: 5rem;
+            font-weight: bold;
+            font-family: 'Oswald', sans-serif;
+            color: #080f84;
+            transition: all 2s ease-in-out;
+        }
+        .highlighted {
+            color: #d27914; /* Special color for specific letters (e.g., blue) */
+        }        
+        .bracket {
+            position: absolute;
+            font-size: 5rem;
+            font-weight: bold;
+            font-family: 'Oswald', sans-serif;
+            color: #d27914;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const letters = ['A', 'U', 'G', 'U', 'S', 'T', 'R', 'A', 'Y', 'J', 'O', 'N', 'E', 'S'];
+        const positions = [];
+        const padding = 50; // Minimum padding between letters
+        const letterElements = [];
+
+        function getRandomPosition() {
+            let left, top, valid;
+            do {
+                valid = true;
+                left = Math.random() * (window.innerWidth - 100);
+                top = Math.random() * (window.innerHeight - 100);
+                
+                for (let pos of positions) {
+                    if (Math.abs(pos.left - left) < padding && Math.abs(pos.top - top) < padding) {
+                        valid = false;
+                        break;
+                    }
+                }
+            } while (!valid);
+            
+            positions.push({ left, top });
+            return { left, top };
+        }
+
+        letters.forEach((letter, index) => {
+            let span = document.createElement('span');
+            span.classList.add('letter');
+            span.textContent = letter;
+            document.body.appendChild(span);
+           
+
+            // Add the 'highlighted' class to 'R', 'A', 'Y'
+
+            letterElements.forEach((span, index) => {
+            if (index === 6 || index === 7 || index === 8) {
+                span.classList.add('highlighted');
+            }
+        
+        });
+
+            let position = getRandomPosition();
+            span.style.left = position.left + 'px';
+            span.style.top = position.top + 'px';
+            letterElements.push(span);
+        });
+
+        // Create brackets
+        const leftBracket = document.createElement('span');
+        const rightBracket = document.createElement('span');
+        leftBracket.classList.add('bracket');
+        rightBracket.classList.add('bracket');
+        leftBracket.textContent = '(';
+        rightBracket.textContent = ')';
+        document.body.appendChild(leftBracket);
+        document.body.appendChild(rightBracket);
+
+            setTimeout(() => {
+                const centerX = window.innerWidth / 2 - 375;
+                const centerY = window.innerHeight / 2 - 125;
+                letterElements.forEach((span, index) => {
+                    let offset = index * 55; // Default spacing
+                    if (index === 0) offset += 8; // Move first A 
+                    if (index === 1) offset -= 0; // Move U
+                    if (index === 2) offset -= 6; // Move G 
+                    if (index === 3) offset -= 12; // Move U 
+                    if (index === 4) offset -= 17; // Move S 
+                    if (index === 5) offset -= 27; // Move T 
+                    if (index === 6) offset += 5; // Move R 
+                    if (index === 7) offset += 5; // Move second A 
+                    if (index === 8) offset -= 5; // Move Y
+                    if (index === 9) offset += 30; // Move J 
+                    if (index === 10) offset += 8; // Move O 
+                    if (index === 11) offset += 4; // Move N 
+                    if (index === 12) offset -= 1; // Move E 
+                    if (index === 13) offset -= 16; // Move S
+
+                    span.style.left = centerX + offset + 'px';
+                    span.style.top = centerY + 'px';
+                });
+
+                // Position the brackets around 'RAY'
+                leftBracket.style.left = centerX + 300 + 'px';  // Adjust this position for the left bracket
+                leftBracket.style.top = centerY - 4 + 'px';
+                rightBracket.style.left = centerX + 483 + 'px';  // Adjust this position for the right bracket
+                rightBracket.style.top = centerY - 4 + 'px';
+
+                // Add a 2-second pause before the parentheses fade in
+                setTimeout(() => {
+                    // Fade in the brackets after the pause
+                    leftBracket.style.opacity = 1;
+                    rightBracket.style.opacity = 1;
+                }, 2000); // 2000ms = 2 seconds delay
+
+            }, 400); // Adjust this for pause (out of 1000 for 1 second)
+        
+    </script>
+</body>
+</html>

@@ -10,7 +10,7 @@
             margin: 0;
             overflow: hidden;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-color: black;
             position: relative;
         }
         .letter {
@@ -18,21 +18,13 @@
             font-size: 5rem;
             font-weight: bold;
             font-family: 'Oswald', sans-serif;
-            color: #080f84;
+            color: #85c1e9;
             transition: all 2s ease-in-out;
         }
         .highlighted {
-            color: #d27914; /* Special color for specific letters (e.g., blue) */
+            color: #f0b27a; /* Special color for specific letters (e.g., blue) */
         }        
-        .bracket {
-            position: absolute;
-            font-size: 5rem;
-            font-weight: bold;
-            font-family: 'Oswald', sans-serif;
-            color: #d27914;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
-        }
+
     </style>
 </head>
 <body>
@@ -83,16 +75,6 @@
             letterElements.push(span);
         });
 
-        // Create brackets
-        const leftBracket = document.createElement('span');
-        const rightBracket = document.createElement('span');
-        leftBracket.classList.add('bracket');
-        rightBracket.classList.add('bracket');
-        leftBracket.textContent = '(';
-        rightBracket.textContent = ')';
-        document.body.appendChild(leftBracket);
-        document.body.appendChild(rightBracket);
-
             setTimeout(() => {
                 const centerX = window.innerWidth / 2 - 375;
                 const centerY = window.innerHeight / 2 - 125;
@@ -116,20 +98,6 @@
                     span.style.left = centerX + offset + 'px';
                     span.style.top = centerY + 'px';
                 });
-
-                // Position the brackets around 'RAY'
-                leftBracket.style.left = centerX + 300 + 'px';  // Adjust this position for the left bracket
-                leftBracket.style.top = centerY - 4 + 'px';
-                rightBracket.style.left = centerX + 483 + 'px';  // Adjust this position for the right bracket
-                rightBracket.style.top = centerY - 4 + 'px';
-
-                // Add a 2-second pause before the parentheses fade in
- //               setTimeout(() => {
- //                   // Fade in the brackets after the pause
- //                   leftBracket.style.opacity = 1;
- //                   rightBracket.style.opacity = 1;
- //               }, 2000); // 2000ms = 2 seconds delay
-
             }, 400); // Adjust this for pause (out of 1000 for 1 second)
         
     </script>

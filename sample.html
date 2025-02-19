@@ -12,7 +12,8 @@
             height: 100vh;
             background-color: black;
             position: relative;
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+
         }
         .letter {
             position: absolute;
@@ -26,15 +27,16 @@
         }
     </style>
 </head>
-<body onclick="slideToPage()">
+<body onclick="zoomInPage()">
     <script>
-    function slideToPage() {
-        document.body.style.transform = "translateY(-100%)";
-        document.body.style.opacity = "0";
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 500);
-    }
+ function zoomInPage() {
+            document.body.style.transform = "scale(1.5)"; // Zoom in effect
+            document.body.style.opacity = "0"; // Fade out
+            setTimeout(() => {
+                window.location.href = "sample.html"; // Redirect after effect
+            }, 500); // Delay to match transition
+        }
+
         const letters = ['A', 'U', 'G', 'U', 'S', 'T', 'R', 'A', 'Y', 'J', 'O', 'N', 'E', 'S'];
         const letterElements = [];
         const basePositionAdjustments = [7, -2, -5.5, -9.5, -11.5, -18.5, -15, -13, -20, -10, -38, -42, -47, -62];
